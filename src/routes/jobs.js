@@ -4,7 +4,7 @@ import NavBar from '../components/Navbar'
 function jobs() {
   return (
     <div>
-      <NavBar/>
+      <NavBar activeTab='jobs'/>
       Jobs page
     </div>
   )

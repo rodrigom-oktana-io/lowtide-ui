@@ -1,4 +1,4 @@
-@import "../assets/variables.scss";
+@import "../assets/variables";
 
 .navBar {
     display: flex;
@@ -23,13 +23,17 @@
     }
 
     &__links {
-        min-width: 40%;
+        width: 40%;
         display: flex;
         font-weight: 600;
         color: $mid-gray;
 
         .navBar__link {
             margin-right: 6rem;
+
+            &.active {
+                color: $main-blue;
+            }
         }
     }
 
@@ -38,7 +42,7 @@
         justify-content: space-between;
         align-items: center;
 
-        & > *:nth-child(-n + 2){
+        &>*:nth-child(-n + 2) {
             color: $dark-gray;
             font-weight: 700;
             margin-right: 2rem
@@ -55,9 +59,9 @@
             border-radius: 50%;
             padding: 4px;
             background-color: $main-blue;
-            display:flex;
-            justify-content:center;
-            align-items:center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             color: $light-gray;
             cursor: pointer;
         }

@@ -1,0 +1,21 @@
+@import "../assets/variables";
+
+.card-header__leftArea {
+    display: flex
+}
+
+.cardContent {
+    display: flex;
+    flex-direction: column;
+
+    &__heading {
+        color: $dark-gray;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem
+    }
+
+    &__description {
+        text-align: justify;
+    }
+}

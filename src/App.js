@@ -4,7 +4,7 @@ import Deploy from './routes/deploy';
 import Timeshift from './routes/timeshift';
 import Jobs from './routes/jobs';
 
-function App() {
+const App = () => {
   return (
     <Router>
       <Switch>

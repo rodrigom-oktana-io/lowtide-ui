@@ -4,7 +4,7 @@ import NavBar from '../components/Navbar'
 function timeshift() {
   return (
     <div>
-      <NavBar/>
+      <NavBar activeTab='timeshift'/>
       Timeshift Page
     </div>
   )
