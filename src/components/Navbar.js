@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import './Navbar.scss';
 import ddtIcon from '../assets/ddt_icon.png';
-import { Link } from 'react-router-dom';
-import SettingsIcon from '@material-ui/icons/Settings';
+import SettingsDrawer from './SettingsDrawer';
 
 const Navbar = ({ activeTab }) => {
   return (
@@ -43,9 +44,7 @@ const Navbar = ({ activeTab }) => {
           Logged in as jorge.pasco@salesforce.com
         </div>
         <button className="unstyled-button navBar__logout">Logout</button>
-        <div className="navBar__settings">
-          <SettingsIcon />
-        </div>
+        <SettingsDrawer position="right" />
       </div>
     </nav>
   );

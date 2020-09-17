@@ -5,10 +5,9 @@ import {
   AccordionDetails,
 } from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
-import { ExpandMore } from '@material-ui/icons';
 import clsx from 'clsx';
 
-import CustomCheckbox from './CustomCheckbox';
+import Checkbox from './Checkbox';
 import Badge from './Badge';
 
 import './Card.scss';
@@ -38,7 +37,7 @@ const useCardStyles = makeStyles({
     color: '#4f4f4f',
   },
   summaryRoot: {
-    height: '4rem'
+    height: '4rem',
   },
   summaryContent: {
     justifyContent: 'space-between',
@@ -53,7 +52,7 @@ const useCardStyles = makeStyles({
 
 const Card = ({ type, startSelected, startExpanded, warning }) => {
   const [selected, setSelected] = useState(startSelected);
-  const classes = useCardStyles(selected);
+  const classes = useCardStyles();
 
   const badgeOptions = {
     background: type === 'available' ? '#27AE60' : '#C23934',
@@ -86,10 +85,7 @@ const Card = ({ type, startSelected, startExpanded, warning }) => {
       >
         <div className="card-header__leftArea">
           {type === 'available' ? (
-            <CustomCheckbox
-              selected={selected}
-              setParentSelected={setSelected}
-            />
+            <Checkbox selected={selected} setParentSelected={setSelected} />
           ) : null}
           <div className="summaryBody__title">Name of the template</div>
         </div>

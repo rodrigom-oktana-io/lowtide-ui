@@ -43,7 +43,7 @@ const CustomCheckbox = ({ selected, setParentSelected }) => {
         <span className={clsx(classes.checkBox, classes.markedCheckbox)} />
       }
       icon={<span className={classes.checkBox} />}
-      inputProps={{ 'aria-label': 'decorative checkbox' }}
+      inputProps={{ 'aria-label': 'selection checkbox' }}
       disableRipple
       onClick={(e) => e.stopPropagation()}
       onChange={() => {
