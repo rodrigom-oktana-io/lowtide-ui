@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Popover, Button, Chip } from '@material-ui/core';
 import { ExpandMore } from '@material-ui/icons';
@@ -8,12 +8,7 @@ import { TemplateFiltersContext } from '../FiltersContext';
 import './FilterBox.scss';
 
 const useStyles = makeStyles((theme) => ({
-  content: {
-    padding: '1rem',
-    fontFamily: 'Montserrat',
-    fontSize: '.8rem',
-  },
-  label: {
+  buttonLabel: {
     textTransform: 'none',
     fontFamily: 'Montserrat',
     fontSize: '.8rem',
@@ -27,35 +22,106 @@ const useStyles = makeStyles((theme) => ({
   expandOpen: {
     transform: 'rotate(180deg)',
   },
+  chipRoot: {
+    backgroundColor: '#737373',
+    margin: 3,
+    padding: '0 2px',
+  },
+  chipRootSelected: {
+    backgroundColor: '#005FB2',
+  },
+  chipLabel: {
+    color: 'white',
+    fontFamily: 'Montserrat',
+    fontSize: 'x-small',
+    marginRight: '1px',
+  },
+  actionButtonRoot: {
+    width: '6rem',
+    padding: 2.5,
+    marginRight: 4,
+    color: 'white',
+  },
+  saveButton: {
+    backgroundColor: '#27AE60',
+    '&:hover': {
+      backgroundColor: '#118f45',
+    },
+  },
+  cancelButton: {
+    backgroundColor: '#4f4f4f',
+    '&:hover': {
+      backgroundColor: '#737373',
+    },
+  },
 }));
 
 const FilterBox = () => {
-  const { filters, setFilters } = useContext(TemplateFiltersContext);
+  // Get all Filters requested on page Load, filters selected and the fuction to set the selected filters
+  const { allFilters, selectedFilters, setSelectedFilters } = useContext(
+    TemplateFiltersContext
+  );
+
+  // Filters in the Popover
+  const [locallyAvailableFilters, setLocallyAvailableFilters] = useState([]);
+  // allFilters change with use effect, we need to update local available
+  useEffect(() => {
+    setLocallyAvailableFilters(allFilters);
+  }, [allFilters]);
+
+  const [locallySelectedFilters, setLocallySelectedFilters] = useState(
+    selectedFilters
+  );
 
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
 
-  const handleClick = (event) => {
+  // Save filters state before opening PopOver
+  const [snapshot, setSnapshot] = useState(null);
+
+  const handleOpen = (event) => {
+    setSnapshot({ locallyAvailableFilters, locallySelectedFilters });
     setAnchorEl(event.currentTarget);
   };
 
   const handleClose = () => {
+    handleCancel();
     setAnchorEl(null);
   };
 
-  const handleDelete = () => console.log('deleted');
+  const handleChipClick = (tag) => {
+    setLocallyAvailableFilters(
+      locallyAvailableFilters.filter((el) => el !== tag)
+    );
+    setLocallySelectedFilters([...locallySelectedFilters, tag]);
+  };
 
-  const handleAdd = () => {
-    setFilters([...filters, 'new filter'])
-  }
+  const handleDelete = (tag) => {
+    setLocallySelectedFilters(
+      locallySelectedFilters.filter((el) => el !== tag)
+    );
+    setLocallyAvailableFilters([...locallyAvailableFilters, tag]);
+  };
+
+  const handleSave = () => {
+    setSelectedFilters(locallySelectedFilters);
+    setAnchorEl(null);
+  };
+
+  const handleCancel = () => {
+    setLocallyAvailableFilters(snapshot.locallyAvailableFilters);
+    setLocallySelectedFilters(snapshot.locallySelectedFilters);
+    setSnapshot(null);
+    setAnchorEl(null);
+  };
 
   return (
     <div>
       <Button
-        onClick={handleClick}
+        onClick={handleOpen}
         disableRipple
         classes={{
-          label: classes.label,
+          label: classes.buttonLabel,
         }}
       >
         Tags
@@ -66,7 +132,7 @@ const FilterBox = () => {
         />
       </Button>
       <Popover
-        open={anchorEl}
+        open={Boolean(anchorEl)}
         anchorEl={anchorEl}
         onClose={handleClose}
         anchorOrigin={{
@@ -78,10 +144,64 @@ const FilterBox = () => {
           horizontal: 'center',
         }}
       >
-        <div className={classes.content}>
-          The content of the Popover.
-          <Chip color="primary" onDelete={handleDelete} />
-          <button onClick={() => handleAdd()}>Add</button>
+        <div className="filterBoxContent">
+          <div className="filterBoxContent__filters">
+            <div className="filterBoxContent__filterGroup">
+              <div className="filterBoxContent__header">Available Tags</div>
+              {locallyAvailableFilters.map((tag, i) => (
+                <Chip
+                  key={`available-${i}`}
+                  // onDelete={handleDelete}
+                  label={tag}
+                  size="small"
+                  classes={{
+                    root: classes.chipRoot,
+                    label: classes.chipLabel,
+                  }}
+                  onClick={() => handleChipClick(tag)}
+                />
+              ))}
+            </div>
+            <div className="filterBoxContent__filterGroup">
+              <div className="filterBoxContent__header">Selected Tags</div>
+              {locallySelectedFilters.map((tag, i) => (
+                <Chip
+                  key={`selected-${i}`}
+                  onDelete={() => handleDelete(tag)}
+                  label={tag}
+                  size="small"
+                  color="primary"
+                  classes={{
+                    root: clsx(classes.chipRoot, classes.chipRootSelected),
+                    label: classes.chipLabel,
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div className="filterBoxContent__buttonContainer">
+            <Button
+              onClick={handleCancel}
+              disableRipple
+              classes={{
+                root: clsx(classes.actionButtonRoot, classes.cancelButton),
+                label: classes.buttonLabel,
+              }}
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={handleSave}
+              disableRipple
+              classes={{
+                root: clsx(classes.actionButtonRoot, classes.saveButton),
+                label: classes.buttonLabel,
+              }}
+            >
+              Save
+            </Button>
+          </div>
         </div>
       </Popover>
     </div>

@@ -1,3 +1,4 @@
+// import React, { useContext } from 'react';
 import React, { useContext } from 'react';
 import NavBar from '../components/Navbar';
 import Card from '../components/Card';
@@ -5,7 +6,7 @@ import SearchBar from '../components/SearchBar';
 import { TemplateFiltersContext } from '../FiltersContext';
 
 const Deploy = () => {
-  const { filters } = useContext(TemplateFiltersContext);
+  const { selectedFilters } = useContext(TemplateFiltersContext);
 
   return (
     <div>
@@ -18,8 +19,9 @@ const Deploy = () => {
         <Card type="org" />
         <Card type="org" warning />
         <SearchBar />
-        {filters.map((el) => (
-          <div>{el}</div>
+        Selected tags:
+        {selectedFilters.map((el) => (
+          <span key={el}>{el} </span>
         ))}
       </main>
     </div>
