@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import NavBar from '../components/Navbar';
 import Card from '../components/Card';
 import SearchBar from '../components/SearchBar';
+import { TemplateFiltersContext } from '../FiltersContext';
 
-const deploy = () => {
+const Deploy = () => {
+  const { filters } = useContext(TemplateFiltersContext);
+
   return (
     <div>
       <NavBar activeTab="deploy" />
@@ -15,9 +18,12 @@ const deploy = () => {
         <Card type="org" />
         <Card type="org" warning />
         <SearchBar />
+        {filters.map((el) => (
+          <div>{el}</div>
+        ))}
       </main>
     </div>
   );
 };
 
-export default deploy;
+export default Deploy;

@@ -3,15 +3,18 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 
+import FilterBox from './FilterBox';
+
 const useStyles = makeStyles({
   root: {
-    padding: '8px 4px',
+    padding: '8px 1rem',
     display: 'flex',
     borderRadius: '7px',
+    alignItems: 'center',
   },
   input: {
     fontFamily: 'Montserrat',
-    marginLeft: '.5rem',
+    fontSize: '.8rem',
     flex: 1,
   },
 });
@@ -26,6 +29,7 @@ const SearchBar = () => {
         placeholder="Search Templates"
         inputProps={{ 'aria-label': 'search templates' }}
       />
+      <FilterBox />
     </Paper>
   );
 };

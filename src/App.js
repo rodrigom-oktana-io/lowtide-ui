@@ -1,8 +1,14 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Redirect, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Redirect,
+  Route,
+} from 'react-router-dom';
 import Deploy from './routes/deploy';
 import Timeshift from './routes/timeshift';
 import Jobs from './routes/jobs';
+import { TemplateFiltersContextProvider } from './FiltersContext';
 
 const App = () => {
   return (
@@ -12,7 +18,9 @@ const App = () => {
           <Redirect to="/deploy" />
         </Route>
         <Route path="/deploy">
-          <Deploy />
+          <TemplateFiltersContextProvider>
+            <Deploy />
+          </TemplateFiltersContextProvider>
         </Route>
         <Route path="/timeshift">
           <Timeshift />
@@ -23,6 +31,6 @@ const App = () => {
       </Switch>
     </Router>
   );
-}
+};
 
 export default App;

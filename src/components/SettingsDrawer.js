@@ -12,6 +12,9 @@ const useStyles = makeStyles({
     width: 'auto',
   },
   settingsDrawer: {
+    outline: 'inherit',
+    border: 'none',
+    cursor: 'pointer',
     width: '2rem',
     height: '2rem',
     borderRadius: '50%',
@@ -55,10 +58,7 @@ const SettingsDrawer = ({ position }) => {
 
   return (
     <div>
-      <button
-        className="unstyled-button navBar__settings"
-        onClick={toggleDrawer(true)}
-      >
+      <button className={classes.settingsDrawer} onClick={toggleDrawer(true)}>
         <SettingsIcon />
       </button>
       <Drawer anchor={position} open={open} onClose={toggleDrawer(false)}>

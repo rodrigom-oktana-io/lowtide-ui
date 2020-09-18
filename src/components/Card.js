@@ -54,13 +54,13 @@ const Card = ({ type, startSelected, startExpanded, warning }) => {
   const [selected, setSelected] = useState(startSelected);
   const classes = useCardStyles();
 
-  const badgeOptions = {
+  const badgeOptions = warning && {
     background: type === 'available' ? '#27AE60' : '#C23934',
     text: type === 'available' ? 'New version' : 'Old version',
     color: 'white',
   };
 
-  const badge = <Badge {...badgeOptions} />;
+  const badge = warning && <Badge {...badgeOptions} />;
 
   return (
     <Accordion
