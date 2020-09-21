@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import NavBar from '../components/Navbar';
 import Card from '../components/Card';
 import SearchBar from '../components/SearchBar';
-import { TemplateFiltersContext } from '../FiltersContext';
+import { TemplateFiltersContext } from '../context/FiltersContext';
 
 const Deploy = () => {
   const { selectedFilters } = useContext(TemplateFiltersContext);

@@ -1,9 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Popover, Button, Chip } from '@material-ui/core';
 import { ExpandMore } from '@material-ui/icons';
 import clsx from 'clsx';
-import { TemplateFiltersContext } from '../FiltersContext';
+
+import useFilters from '../hooks/useFilters';
 
 import './FilterBox.scss';
 
@@ -57,63 +58,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const FilterBox = () => {
-  // Get all Filters requested on page Load, filters selected and the fuction to set the selected filters
-  const { allFilters, selectedFilters, setSelectedFilters } = useContext(
-    TemplateFiltersContext
-  );
-
-  // Filters in the Popover
-  const [locallyAvailableFilters, setLocallyAvailableFilters] = useState([]);
-  // allFilters change with use effect, we need to update local available
-  useEffect(() => {
-    setLocallyAvailableFilters(allFilters);
-  }, [allFilters]);
-
-  const [locallySelectedFilters, setLocallySelectedFilters] = useState(
-    selectedFilters
-  );
-
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = useState(null);
 
-  // Save filters state before opening PopOver
-  const [snapshot, setSnapshot] = useState(null);
-
-  const handleOpen = (event) => {
-    setSnapshot({ locallyAvailableFilters, locallySelectedFilters });
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    handleCancel();
-    setAnchorEl(null);
-  };
-
-  const handleChipClick = (tag) => {
-    setLocallyAvailableFilters(
-      locallyAvailableFilters.filter((el) => el !== tag)
-    );
-    setLocallySelectedFilters([...locallySelectedFilters, tag]);
-  };
-
-  const handleDelete = (tag) => {
-    setLocallySelectedFilters(
-      locallySelectedFilters.filter((el) => el !== tag)
-    );
-    setLocallyAvailableFilters([...locallyAvailableFilters, tag]);
-  };
-
-  const handleSave = () => {
-    setSelectedFilters(locallySelectedFilters);
-    setAnchorEl(null);
-  };
-
-  const handleCancel = () => {
-    setLocallyAvailableFilters(snapshot.locallyAvailableFilters);
-    setLocallySelectedFilters(snapshot.locallySelectedFilters);
-    setSnapshot(null);
-    setAnchorEl(null);
-  };
+  const [
+    anchorEl,
+    locallyAvailableFilters,
+    locallySelectedFilters,
+    handleChipClick,
+    handleDelete,
+    handleOpen,
+    handleClose,
+    handleCancel,
+    handleSave,
+  ] = useFilters();
 
   return (
     <div>

@@ -8,7 +8,7 @@ import {
 import Deploy from './routes/deploy';
 import Timeshift from './routes/timeshift';
 import Jobs from './routes/jobs';
-import { TemplateFiltersContextProvider } from './FiltersContext';
+import { TemplateFiltersContextProvider } from './context/FiltersContext';
 
 const App = () => {
   return (

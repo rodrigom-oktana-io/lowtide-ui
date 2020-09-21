@@ -1,0 +1,10 @@
+{
+  "parser": "babel-eslint",
+  "extends": ["react-app"],
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": "error",
+    "spaced-comment": "off",
+    "no-console": "warn"
+  }
+}
