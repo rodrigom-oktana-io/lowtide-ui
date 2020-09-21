@@ -1,0 +1,20 @@
+@import '../assets/variables.scss';
+
+.main-wrapper {
+    color: $dark-gray;
+
+    .page-title {
+        margin: 1rem 0
+    }
+
+    .page-description {
+        margin-bottom: 2rem
+    }
+
+    .page-cardContainers {
+        padding: 0 10rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}

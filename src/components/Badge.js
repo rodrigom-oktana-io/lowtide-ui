@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper';
 const useStyles = makeStyles({
   root: {
     backgroundColor: (props) => props.background || '#27AE60',
-    padding: '0.7rem',
+    padding: '0.5rem',
     width: 'fit-content',
     fontSize: '0.8rem',
     fontWeight: '700',

@@ -1,7 +1,7 @@
 {
   "parser": "babel-eslint",
-  "extends": ["react-app"],
-  "plugins": ["prettier"],
+  "extends": ["react-app", "plugin:jsx-a11y/recommended"],
+  "plugins": ["prettier", "jsx-a11y"],
   "rules": {
     "prettier/prettier": "error",
     "spaced-comment": "off",

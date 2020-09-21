@@ -11,6 +11,7 @@ const useStyles = makeStyles({
     display: 'flex',
     borderRadius: '7px',
     alignItems: 'center',
+    marginBottom: '0.5rem',
   },
   input: {
     fontFamily: 'Montserrat',

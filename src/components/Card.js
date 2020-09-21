@@ -14,13 +14,11 @@ import './Card.scss';
 
 const useCardStyles = makeStyles({
   root: {
-    marginBottom: '5px',
+    marginBottom: '3px',
+    boxShadow: 'none',
     '&$expanded': {
-      margin: '0 0 5px 0',
+      margin: '0 0 3px 0',
     },
-  },
-  detailsRoot: {
-    padding: '2rem',
   },
   expanded: {},
   header: {
@@ -37,7 +35,13 @@ const useCardStyles = makeStyles({
     color: '#4f4f4f',
   },
   summaryRoot: {
-    height: '4rem',
+    height: '3.5rem',
+    '&$expanded': {
+      minHeight: '3.5rem',
+    },
+  },
+  arrow: {
+    color: '#F6F6F6',
   },
   summaryContent: {
     justifyContent: 'space-between',
@@ -45,8 +49,9 @@ const useCardStyles = makeStyles({
     margin: '0',
     padding: '0',
   },
-  arrow: {
-    color: '#F6F6F6',
+  detailsRoot: {
+    padding: 16,
+    fontSize: '.8rem',
   },
 });
 
@@ -75,12 +80,13 @@ const Card = ({ type, startSelected, startExpanded, warning }) => {
         // expandIcon={<ExpandMore className={classes.arrow} />}
         id="card-header"
         className={clsx(classes.header, {
-          [classes.selected]: selected,
+          [classes.selected]: type === 'available' && selected,
           [classes.warning]: type === 'org' && warning,
         })}
         classes={{
           root: classes.summaryRoot,
           content: classes.summaryContent,
+          expanded: classes.expanded,
         }}
       >
         <div className="card-header__leftArea">
