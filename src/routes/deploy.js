@@ -64,10 +64,10 @@ const Deploy = () => {
             styles={{ width: '30vw', height: '65vh' }}
           />
         </div>
-        Selected tags:
+        {/* Selected tags:
         {selectedFilters.map((el) => (
           <span key={el}>{el} </span>
-        ))}
+        ))} */}
       </main>
     </div>
   );

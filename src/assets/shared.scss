@@ -1,3 +1,5 @@
+@import './variables.scss';
+
 // Montserrat font
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 
@@ -34,4 +36,8 @@ a {
   font-weight: 500;
   transition: all 0.4s;
   text-decoration: none;
+}
+
+.blue {
+  color: $main-blue
 }

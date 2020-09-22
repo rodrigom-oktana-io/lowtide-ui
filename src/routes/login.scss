@@ -1,0 +1,80 @@
+@import '../assets/variables.scss';
+
+.login-screen {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+
+    .background-illustration {
+        z-index: 0;
+        position: absolute;
+        right: 7rem;
+        width: 60vw;
+    }
+
+    &__title {
+        color: $dark-gray;
+        text-align: center;
+    }
+
+    &__description {
+        color: $mid-gray;
+        font-size: 0.8rem;
+        margin: 40px 0;
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__input {
+        border: none;
+        border-radius: 5px;
+        background-color: white;
+        box-shadow: 6px 4px 8px -5px rgba(0, 0, 0, 0.18);
+        font-size: 14;
+        padding: 16px 12px;
+        font-family: Montserrat;
+        margin-bottom: 10px
+    }
+
+    &__input::placeholder {
+        color: #949494;
+    }
+
+    &__submit {
+        font-family: Montserrat;
+        font-weight: 700;
+        background: $main-blue;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+    }
+
+    &__or-text {
+        margin: 1rem auto
+    }
+
+    &__salesforce {
+        display: flex;
+        align-items: center;
+        align-self: center;
+        font-family: Montserrat;
+        font-weight: 700;
+        background: rgb(61, 163, 223);
+        color: white;
+        width: fit-content;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+    }
+
+    .salesforce-icon {
+        width: 20px;
+        margin-right: 10px
+    }
+}

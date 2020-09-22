@@ -39,7 +39,7 @@ const CardContainer = ({ type, styles }) => {
       <h3 className={classes.title}>
         {type === 'available' ? 'Available Templates' : 'Your org'}
       </h3>
-      <SearchBar />
+      <SearchBar filterBox placeholder="Search Templates" />
       <Card type={type} startExpanded warning />
       <Card type={type} />
       <Card type={type} />

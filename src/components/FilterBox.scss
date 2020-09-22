@@ -28,4 +28,15 @@
         display: flex;
         justify-content: center
     }
+
+    &__filterGroup {
+        // So we can position the clear button as absolute with this element as the positioned ancestor
+        position: relative;
+    }
+
+    &__clearButtonContainer {
+        position: absolute;
+        top: 0;
+        right: 50px
+    }
 }

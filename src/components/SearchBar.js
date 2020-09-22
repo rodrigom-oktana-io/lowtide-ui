@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import InputBase from '@material-ui/core/InputBase';
+import { Paper, InputBase } from '@material-ui/core';
 
 import FilterBox from './FilterBox';
 
@@ -26,9 +25,9 @@ const SearchBar = () => {
   return (
     <Paper component="form" className={classes.root}>
       <InputBase
+        inputProps={{ 'aria-label': 'naked' }}
         className={classes.input}
-        placeholder="Search Templates"
-        inputProps={{ 'aria-label': 'search templates' }}
+        placeholder={'Search templates'}
       />
       <FilterBox />
     </Paper>

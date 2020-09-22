@@ -1,5 +1,73 @@
 import { useContext, useEffect, useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+
 import { TemplateFiltersContext } from '../context/FiltersContext';
+
+const useFiltersStyles = makeStyles((theme) => ({
+  buttonLabel: {
+    textTransform: 'none',
+    fontFamily: 'Montserrat',
+    fontSize: '.8rem',
+  },
+  expand: {
+    transform: 'rotate(0deg)',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest,
+    }),
+  },
+  expandOpen: {
+    transform: 'rotate(180deg)',
+  },
+  chipRoot: {
+    backgroundColor: '#737373',
+    margin: 3,
+    padding: '0 2px',
+  },
+  chipRootSelected: {
+    backgroundColor: '#005FB2',
+  },
+  chipLabel: {
+    color: 'white',
+    fontFamily: 'Montserrat',
+    fontSize: 'x-small',
+    marginRight: '1px',
+  },
+  actionButtonRoot: {
+    width: '6rem',
+    padding: 2.5,
+    marginRight: 4,
+    color: 'white',
+  },
+  saveButton: {
+    backgroundColor: '#27AE60',
+    '&:hover': {
+      backgroundColor: '#118f45',
+    },
+  },
+  cancelButton: {
+    backgroundColor: '#4f4f4f',
+    '&:hover': {
+      backgroundColor: '#737373',
+    },
+  },
+  clearButton: {
+    minWidth: 50,
+    padding: 0,
+    color: 'white',
+    backgroundColor: '#4f4f4f',
+    '&:hover': {
+      backgroundColor: '#737373',
+    },
+  },
+  clearButtonLabel: {
+    textTransform: 'none',
+    fontFamily: 'Montserrat',
+    fontSize: '.5rem',
+  },
+  hidden: {
+    display: 'none',
+  },
+}));
 
 const useFilters = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -59,6 +127,10 @@ const useFilters = () => {
     setAnchorEl(null);
   };
 
+  const handleClearFilters = () => {
+    setLocallySelectedFilters([]);
+  };
+
   return [
     anchorEl,
     locallyAvailableFilters,
@@ -69,7 +141,8 @@ const useFilters = () => {
     handleClose,
     handleCancel,
     handleSave,
+    handleClearFilters,
   ];
 };
 
-export default useFilters;
+export { useFilters, useFiltersStyles };
