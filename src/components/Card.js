@@ -55,7 +55,7 @@ const useCardStyles = makeStyles({
   },
 });
 
-const Card = ({ type, startSelected, startExpanded, warning }) => {
+const Card = ({ type, startSelected, startExpanded, warning, data }) => {
   const [selected, setSelected] = useState(startSelected);
   const classes = useCardStyles();
 
@@ -93,7 +93,7 @@ const Card = ({ type, startSelected, startExpanded, warning }) => {
           {type === 'available' ? (
             <Checkbox selected={selected} setParentSelected={setSelected} />
           ) : null}
-          <div className="summaryBody__title">Name of the template</div>
+          <div className="summaryBody__title">{data.name}</div>
         </div>
         <div className="card-header__rightArea">{warning ? badge : null}</div>
       </AccordionSummary>
@@ -112,12 +112,7 @@ const Card = ({ type, startSelected, startExpanded, warning }) => {
               <span className="bold">Version:</span> 2020.32
             </div>
           </div>
-          <div className="cardContent__description">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras semper
-            non mauris nec semper. Sed euismod purus et orci mattis, id aliquet
-            magna volutpat. Aliquam sed turpis eget ipsum sodales tristique non
-            vitae ante. Proin venenatis non lorem vitae iaculis.
-          </div>
+          <div className="cardContent__description">{data.description}</div>
         </div>
       </AccordionDetails>
     </Accordion>

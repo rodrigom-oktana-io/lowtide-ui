@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import './Navbar.scss';
 import ddtIcon from '../assets/ddt_icon.png';
 import SettingsDrawer from './SettingsDrawer';
+import { SessionContext } from '../context/SessionContext';
 
 const Navbar = ({ activeTab }) => {
+  const { username } = useContext(SessionContext);
+
   return (
     <nav className="navBar">
       <div className="navBar__iconTitle">
@@ -40,9 +43,7 @@ const Navbar = ({ activeTab }) => {
       </div>
 
       <div className="navBar__status">
-        <div className="navBar__user">
-          Logged in as jorge.pasco@salesforce.com
-        </div>
+        <div className="navBar__user">Logged in as {username}</div>
         <button className="unstyled-button navBar__logout">Logout</button>
         <SettingsDrawer position="right" />
       </div>

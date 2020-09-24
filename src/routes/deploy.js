@@ -5,11 +5,13 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import NavBar from '../components/Navbar';
 import CardContainer from '../components/CardContainer';
+import Card from '../components/Card';
 import { TemplateFiltersContext } from '../context/FiltersContext';
+import useCards from '../hooks/useCards';
 
 import './deploy.scss';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   label: {
     fontFamily: 'Montserrat',
     fontSize: '1rem',
@@ -24,10 +26,12 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: '#016dcc',
     },
   },
-}));
+});
 
 const Deploy = () => {
   const classes = useStyles();
+  const availableCards = useCards('available');
+  const orgCards = useCards('org');
 
   const { selectedFilters } = useContext(TemplateFiltersContext);
 
@@ -47,7 +51,19 @@ const Deploy = () => {
           <CardContainer
             type="available"
             styles={{ width: '30vw', height: '65vh' }}
-          />
+          >
+            {availableCards.map((card, i) => (
+              <Card
+                key={i}
+                type={'available'}
+                startExpanded={i === 0}
+                data={{
+                  name: card.template.label,
+                  description: card.template.description,
+                }}
+              />
+            ))}
+          </CardContainer>
 
           <Button
             disableRipple
@@ -59,10 +75,19 @@ const Deploy = () => {
             Deploy
           </Button>
 
-          <CardContainer
-            type="org"
-            styles={{ width: '30vw', height: '65vh' }}
-          />
+          <CardContainer type="org" styles={{ width: '30vw', height: '65vh' }}>
+            {orgCards.map((card, i) => (
+              <Card
+                key={i}
+                type={'available'}
+                startExpanded={i === 0}
+                data={{
+                  name: card.template.label,
+                  description: card.template.description,
+                }}
+              />
+            ))}
+          </CardContainer>
         </div>
         {/* Selected tags:
         {selectedFilters.map((el) => (

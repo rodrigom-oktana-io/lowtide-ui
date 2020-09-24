@@ -3,7 +3,6 @@ import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 
 import SearchBar from './SearchBar';
-import Card from './Card';
 
 const useStyles = makeStyles({
   root: {
@@ -27,7 +26,7 @@ const useStyles = makeStyles({
   },
 });
 
-const CardContainer = ({ type, styles }) => {
+const CardContainer = ({ children, type, styles }) => {
   const classes = useStyles(styles);
 
   return (
@@ -40,16 +39,7 @@ const CardContainer = ({ type, styles }) => {
         {type === 'available' ? 'Available Templates' : 'Your org'}
       </h3>
       <SearchBar filterBox placeholder="Search Templates" />
-      <Card type={type} startExpanded warning />
-      <Card type={type} />
-      <Card type={type} />
-      <Card type={type} />
-      <Card type={type} />
-      <Card type={type} />
-      <Card type={type} />
-      <Card type={type} />
-      <Card type={type} />
-      <Card type={type} />
+      {children}
     </Paper>
   );
 };

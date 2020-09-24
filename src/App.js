@@ -22,7 +22,7 @@ const App = () => {
           {isLoggedIn ? <Redirect to="/deploy" /> : <Redirect to="/login" />}
         </Route>
         <Route path="/login">
-          <Login />
+          {isLoggedIn ? <Redirect to="/deploy" /> : <Login />}
         </Route>
         <Route path="/deploy">
           {isLoggedIn ? (
