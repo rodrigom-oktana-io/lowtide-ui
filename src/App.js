@@ -9,7 +9,7 @@ import Login from './routes/login';
 import Deploy from './routes/deploy';
 import Timeshift from './routes/timeshift';
 import Jobs from './routes/jobs';
-import { TemplateFiltersContextProvider } from './context/FiltersContext';
+import { TagsContextProvider } from './context/TagsContext';
 import { SessionContext } from './context/SessionContext';
 
 const App = () => {
@@ -26,9 +26,9 @@ const App = () => {
         </Route>
         <Route path="/deploy">
           {isLoggedIn ? (
-            <TemplateFiltersContextProvider>
+            <TagsContextProvider>
               <Deploy />
-            </TemplateFiltersContextProvider>
+            </TagsContextProvider>
           ) : (
             <Redirect to="/login" />
           )}

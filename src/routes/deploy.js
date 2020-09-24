@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import NavBar from '../components/Navbar';
 import CardContainer from '../components/CardContainer';
 import Card from '../components/Card';
-import { TemplateFiltersContext } from '../context/FiltersContext';
+import { TagsContext } from '../context/TagsContext';
 import useCards from '../hooks/useCards';
 
 import './deploy.scss';
@@ -33,7 +33,7 @@ const Deploy = () => {
   const availableCards = useCards('available');
   const orgCards = useCards('org');
 
-  const { selectedFilters } = useContext(TemplateFiltersContext);
+  const { selectedRepoTags } = useContext(TagsContext);
 
   return (
     <div className="fullPage">
@@ -79,7 +79,7 @@ const Deploy = () => {
             {orgCards.map((card, i) => (
               <Card
                 key={i}
-                type={'available'}
+                type={'org'}
                 startExpanded={i === 0}
                 data={{
                   name: card.template.label,
@@ -89,10 +89,10 @@ const Deploy = () => {
             ))}
           </CardContainer>
         </div>
-        {/* Selected tags:
-        {selectedFilters.map((el) => (
+        Selected tags:
+        {selectedRepoTags.map((el) => (
           <span key={el}>{el} </span>
-        ))} */}
+        ))}
       </main>
     </div>
   );

@@ -7,6 +7,7 @@ import { SessionContext } from '../context/SessionContext';
 const API_URL = 'https://lowtide.herokuapp.com/api';
 
 const useLogin = () => {
+  // axios.defaults.withCredentials = true;
   const { setIsLoggedIn } = useContext(SessionContext);
 
   const [email, setEmail] = useState('');
@@ -20,6 +21,8 @@ const useLogin = () => {
       return formRef.current.reportValidity();
 
     try {
+      // const response = await axios.get('https://lowtide.herokuapp.com/');
+      // console.log(response);
       const response = await axios.post(`${API_URL}/auth`, {
         source: 'credentials',
         credentials: {
@@ -35,6 +38,7 @@ const useLogin = () => {
       }
     } catch (error) {
       console.log({ error });
+      alert(error);
     }
   };
 

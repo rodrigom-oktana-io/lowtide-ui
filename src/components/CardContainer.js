@@ -20,7 +20,7 @@ const useStyles = makeStyles({
     scrollbarWidth: 'none',
   },
   title: {
-    color: '#4f4f4f',
+    color: '#005FB2',
     textAlign: 'center',
     marginBottom: '1rem',
   },

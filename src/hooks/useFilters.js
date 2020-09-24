@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { TemplateFiltersContext } from '../context/FiltersContext';
+import { TagsContext } from '../context/TagsContext';
 
 const useFiltersStyles = makeStyles((theme) => ({
   buttonLabel: {
@@ -73,19 +73,19 @@ const useFilters = () => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   // Get all Filters requested on page Load, filters selected and the fuction to set the selected filters
-  const { allFilters, selectedFilters, setSelectedFilters } = useContext(
-    TemplateFiltersContext
+  const { allRepoTags, selectedRepoTags, setSelectedRepoTags } = useContext(
+    TagsContext
   );
 
   // Filters in the Popover
   const [locallyAvailableFilters, setLocallyAvailableFilters] = useState([]);
   // allFilters change with use effect in the Context Provider, we need to update local available, too
   useEffect(() => {
-    setLocallyAvailableFilters(allFilters);
-  }, [allFilters]);
+    setLocallyAvailableFilters(allRepoTags);
+  }, [allRepoTags]);
 
   const [locallySelectedFilters, setLocallySelectedFilters] = useState(
-    selectedFilters
+    selectedRepoTags
   );
 
   // Save filters state before opening PopOver
@@ -123,7 +123,7 @@ const useFilters = () => {
   };
 
   const handleSave = () => {
-    setSelectedFilters(locallySelectedFilters);
+    setSelectedRepoTags(locallySelectedFilters);
     setAnchorEl(null);
   };
 
