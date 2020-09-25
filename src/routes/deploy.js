@@ -30,10 +30,8 @@ const useStyles = makeStyles({
 
 const Deploy = () => {
   const classes = useStyles();
-  const availableCards = useCards('available');
-  const orgCards = useCards('org');
-
-  const { selectedRepoTags } = useContext(TagsContext);
+  const [availableCards] = useCards('available');
+  const [orgCards] = useCards('org');
 
   return (
     <div className="fullPage">
@@ -89,10 +87,6 @@ const Deploy = () => {
             ))}
           </CardContainer>
         </div>
-        Selected tags:
-        {selectedRepoTags.map((el) => (
-          <span key={el}>{el} </span>
-        ))}
       </main>
     </div>
   );

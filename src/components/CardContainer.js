@@ -20,7 +20,7 @@ const useStyles = makeStyles({
     scrollbarWidth: 'none',
   },
   title: {
-    color: '#005FB2',
+    color: '#4f4f4f',
     textAlign: 'center',
     marginBottom: '1rem',
   },
@@ -38,7 +38,7 @@ const CardContainer = ({ children, type, styles }) => {
       <h3 className={classes.title}>
         {type === 'available' ? 'Available Templates' : 'Your org'}
       </h3>
-      <SearchBar filterBox placeholder="Search Templates" />
+      <SearchBar filterBox placeholder="Search Templates" type={type} />
       {children}
     </Paper>
   );

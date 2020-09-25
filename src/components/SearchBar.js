@@ -19,7 +19,7 @@ const useStyles = makeStyles({
   },
 });
 
-const SearchBar = () => {
+const SearchBar = ({ type }) => {
   const classes = useStyles();
 
   return (
@@ -29,7 +29,7 @@ const SearchBar = () => {
         className={classes.input}
         placeholder={'Search templates'}
       />
-      <FilterBox />
+      <FilterBox type={type} />
     </Paper>
   );
 };

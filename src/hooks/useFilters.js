@@ -9,6 +9,15 @@ const useFiltersStyles = makeStyles((theme) => ({
     fontFamily: 'Montserrat',
     fontSize: '.8rem',
   },
+  openButtonRootFiltersOn: {
+    backgroundColor: '#005FB2',
+    '&:hover': {
+      backgroundColor: '#005FB2',
+    },
+  },
+  openButtonLabelFiltersOn: {
+    color: '#F6F6F6',
+  },
   expand: {
     transform: 'rotate(0deg)',
     transition: theme.transitions.create('transform', {
@@ -69,23 +78,28 @@ const useFiltersStyles = makeStyles((theme) => ({
   },
 }));
 
-const useFilters = () => {
+const useFilters = (type) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
-  // Get all Filters requested on page Load, filters selected and the fuction to set the selected filters
-  const { allRepoTags, selectedRepoTags, setSelectedRepoTags } = useContext(
-    TagsContext
-  );
+  const {
+    allRepoTags,
+    selectedRepoTags,
+    setSelectedRepoTags,
+    allOrgTags,
+    selectedOrgTags,
+    setSelectedOrgTags,
+  } = useContext(TagsContext);
 
   // Filters in the Popover
   const [locallyAvailableFilters, setLocallyAvailableFilters] = useState([]);
+
   // allFilters change with use effect in the Context Provider, we need to update local available, too
   useEffect(() => {
-    setLocallyAvailableFilters(allRepoTags);
-  }, [allRepoTags]);
+    setLocallyAvailableFilters(type === 'available' ? allRepoTags : allOrgTags);
+  }, [allRepoTags, allOrgTags, type]);
 
   const [locallySelectedFilters, setLocallySelectedFilters] = useState(
-    selectedRepoTags
+    type === 'available' ? selectedRepoTags : selectedOrgTags
   );
 
   // Save filters state before opening PopOver
@@ -123,8 +137,10 @@ const useFilters = () => {
   };
 
   const handleSave = () => {
-    setSelectedRepoTags(locallySelectedFilters);
     setAnchorEl(null);
+    if (type === 'available')
+      return setSelectedRepoTags(locallySelectedFilters);
+    setSelectedOrgTags(locallySelectedFilters);
   };
 
   const handleClearFilters = () => {

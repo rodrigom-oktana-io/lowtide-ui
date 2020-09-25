@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect } from 'react';
+import React, { useState, createContext } from 'react';
 
 const TagsContext = createContext();
 
@@ -6,18 +6,21 @@ const TagsContextProvider = (props) => {
   const [allRepoTags, setAllRepoTags] = useState([]);
   const [selectedRepoTags, setSelectedRepoTags] = useState([]);
 
-  // available filters are set in this request and doesn't change
-  useEffect(() => {
-    // Request:
-    const requestedFilters = Array.from({ length: 40 }).map(
-      (_, i) => `Tag ${i}`
-    );
-    setAllRepoTags(requestedFilters);
-  }, []);
+  const [allOrgTags, setAllOrgTags] = useState([]);
+  const [selectedOrgTags, setSelectedOrgTags] = useState([]);
 
   return (
     <TagsContext.Provider
-      value={{ allRepoTags, selectedRepoTags, setSelectedRepoTags }}
+      value={{
+        allRepoTags,
+        setAllRepoTags,
+        selectedRepoTags,
+        setSelectedRepoTags,
+        allOrgTags,
+        setAllOrgTags,
+        selectedOrgTags,
+        setSelectedOrgTags,
+      }}
     >
       {props.children}
     </TagsContext.Provider>

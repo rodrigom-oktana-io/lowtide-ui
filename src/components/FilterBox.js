@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Popover, Button, Chip } from '@material-ui/core';
 import { ExpandMore } from '@material-ui/icons';
 import clsx from 'clsx';
 
 import { useFilters, useFiltersStyles } from '../hooks/useFilters';
+import { TagsContext } from '../context/TagsContext';
 
 import './FilterBox.scss';
 
-const FilterBox = () => {
+const FilterBox = ({ type }) => {
   const classes = useFiltersStyles();
+  const { selectedRepoTags, selectedOrgTags } = useContext(TagsContext);
+
+  const tagsSelected =
+    (type === 'available' && selectedRepoTags.length > 0) ||
+    (type === 'org' && selectedOrgTags.length > 0);
 
   const [
     anchorEl,
@@ -21,7 +27,7 @@ const FilterBox = () => {
     handleCancel,
     handleSave,
     handleClearFilters,
-  ] = useFilters();
+  ] = useFilters(type);
 
   return (
     <div>
@@ -29,7 +35,12 @@ const FilterBox = () => {
         onClick={handleOpen}
         disableRipple
         classes={{
-          label: classes.buttonLabel,
+          root: clsx({
+            [classes.openButtonRootFiltersOn]: tagsSelected,
+          }),
+          label: clsx(classes.buttonLabel, {
+            [classes.openButtonLabelFiltersOn]: tagsSelected,
+          }),
         }}
       >
         Tags
@@ -72,7 +83,7 @@ const FilterBox = () => {
             <div className="filterBoxContent__filterGroup">
               <div className="filterBoxContent__header">Selected Tags </div>
 
-              <div class="filterBoxContent__clearButtonContainer">
+              <div className="filterBoxContent__clearButtonContainer">
                 <Button
                   onClick={() => handleClearFilters()}
                   disableRipple
