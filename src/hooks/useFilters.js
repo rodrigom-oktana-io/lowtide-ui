@@ -27,20 +27,6 @@ const useFiltersStyles = makeStyles((theme) => ({
   expandOpen: {
     transform: 'rotate(180deg)',
   },
-  chipRoot: {
-    backgroundColor: '#737373',
-    margin: 3,
-    padding: '0 2px',
-  },
-  chipRootSelected: {
-    backgroundColor: '#005FB2',
-  },
-  chipLabel: {
-    color: 'white',
-    fontFamily: 'Montserrat',
-    fontSize: 'x-small',
-    marginRight: '1px',
-  },
   actionButtonRoot: {
     width: '6rem',
     padding: 2.5,

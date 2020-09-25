@@ -5,6 +5,7 @@ import clsx from 'clsx';
 
 import { useFilters, useFiltersStyles } from '../hooks/useFilters';
 import { TagsContext } from '../context/TagsContext';
+import Tag from './Tag';
 
 import './FilterBox.scss';
 
@@ -68,15 +69,10 @@ const FilterBox = ({ type }) => {
             <div className="filterBoxContent__filterGroup">
               <div className="filterBoxContent__header">Available Tags</div>
               {locallyAvailableFilters.map((tag, i) => (
-                <Chip
+                <Tag
                   key={`available-${i}`}
                   label={tag}
-                  size="small"
-                  classes={{
-                    root: classes.chipRoot,
-                    label: classes.chipLabel,
-                  }}
-                  onClick={() => handleChipClick(tag)}
+                  handleChipClick={handleChipClick}
                 />
               ))}
             </div>
@@ -99,16 +95,11 @@ const FilterBox = ({ type }) => {
               </div>
 
               {locallySelectedFilters.map((tag, i) => (
-                <Chip
+                <Tag
                   key={`selected-${i}`}
-                  onDelete={() => handleDelete(tag)}
+                  handleDelete={handleDelete}
                   label={tag}
-                  size="small"
-                  color="primary"
-                  classes={{
-                    root: clsx(classes.chipRoot, classes.chipRootSelected),
-                    label: classes.chipLabel,
-                  }}
+                  selected
                 />
               ))}
             </div>

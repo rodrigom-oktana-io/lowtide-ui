@@ -1,12 +1,10 @@
-// import React, { useContext } from 'react';
-import React, { useContext } from 'react';
+import React from 'react';
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import NavBar from '../components/Navbar';
 import CardContainer from '../components/CardContainer';
 import Card from '../components/Card';
-import { TagsContext } from '../context/TagsContext';
 import useCards from '../hooks/useCards';
 
 import './deploy.scss';
@@ -39,11 +37,10 @@ const Deploy = () => {
       <main className="main-wrapper">
         <h3 className="page-title">Deploy Templates</h3>
         <p className="page-description">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mus eu dictum
-          nisl scelerisque bibendum adipiscing pellentesque. Commodo venenatis
-          nec hendrerit urna vulputate egestas porttitor orci, orci. In
-          ultricies nec non vel nunc vitae. Faucibus in et elit arcu arcu diam
-          mollis placerat.{' '}
+          Einstein Analytics application Templates ready to be deployed. Pick
+          the ones you want from the available section and click DEPLOY to get
+          them to your org. You can also check what templates you already have
+          in the right section.
         </p>
         <div className="page-cardContainers">
           <CardContainer
@@ -58,6 +55,7 @@ const Deploy = () => {
                 data={{
                   name: card.template.label,
                   description: card.template.description,
+                  tags: card.template.tags,
                 }}
               />
             ))}
@@ -82,6 +80,7 @@ const Deploy = () => {
                 data={{
                   name: card.template.label,
                   description: card.template.description,
+                  tags: card.template.tags,
                 }}
               />
             ))}

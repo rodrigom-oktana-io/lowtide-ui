@@ -9,6 +9,7 @@ import clsx from 'clsx';
 
 import Checkbox from './Checkbox';
 import Badge from './Badge';
+import Tag from './Tag';
 
 import './Card.scss';
 
@@ -113,6 +114,12 @@ const Card = ({ type, startSelected, startExpanded, warning, data }) => {
             </div>
           </div>
           <div className="cardContent__description">{data.description}</div>
+          {data.tags && (
+            <div className="cardContent__tags">
+              {data.tags &&
+                data.tags.map((tag) => <Tag label={tag} selected />)}
+            </div>
+          )}
         </div>
       </AccordionDetails>
     </Accordion>
