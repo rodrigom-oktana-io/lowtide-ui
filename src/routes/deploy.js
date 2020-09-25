@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -6,6 +6,8 @@ import NavBar from '../components/Navbar';
 import CardContainer from '../components/CardContainer';
 import Card from '../components/Card';
 import useCards from '../hooks/useCards';
+
+import { FilterContext } from '../context/FilterContext';
 
 import './deploy.scss';
 
@@ -27,6 +29,7 @@ const useStyles = makeStyles({
 });
 
 const Deploy = () => {
+  const { repoSearchText, orgSearchText } = useContext(FilterContext);
   const classes = useStyles();
   const [availableCards] = useCards('available');
   const [orgCards] = useCards('org');
@@ -86,6 +89,8 @@ const Deploy = () => {
             ))}
           </CardContainer>
         </div>
+        Repo search: {repoSearchText}
+        Org search: {orgSearchText}
       </main>
     </div>
   );

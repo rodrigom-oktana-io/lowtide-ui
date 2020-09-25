@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { TagsContext } from '../context/TagsContext';
+import { FilterContext } from '../context/FilterContext';
 
 const useFiltersStyles = makeStyles((theme) => ({
   buttonLabel: {
@@ -74,7 +74,7 @@ const useFilters = (type) => {
     allOrgTags,
     selectedOrgTags,
     setSelectedOrgTags,
-  } = useContext(TagsContext);
+  } = useContext(FilterContext);
 
   // Filters in the Popover
   const [locallyAvailableFilters, setLocallyAvailableFilters] = useState([]);

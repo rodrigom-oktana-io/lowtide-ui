@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { repoTemplatesResponse, orgTemplatesResponse } from '../mockData';
-import { TagsContext } from '../context/TagsContext';
+import { FilterContext } from '../context/FilterContext';
 
 const useCards = (type) => {
   const [cards, setCards] = useState([]);
@@ -10,7 +10,9 @@ const useCards = (type) => {
     setAllOrgTags,
     selectedRepoTags,
     selectedOrgTags,
-  } = useContext(TagsContext);
+    repoSearchText,
+    orgSearchText,
+  } = useContext(FilterContext);
 
   const getCards = async (type) => {
     // TODO: Get real cards
@@ -37,28 +39,38 @@ const useCards = (type) => {
   }, [setAllRepoTags, type, setAllOrgTags]);
 
   const cardsToRender = () => {
-    let cardsToRender = [];
-    if (type === 'available') {
-      if (selectedRepoTags.length === 0) {
-        cardsToRender = cards;
-      } else {
-        // Filter those who have at least one tag that is in the selcted tags
-        cardsToRender = cards.filter(
-          (card) =>
-            card.template.tags &&
-            card.template.tags.some((tag) => selectedRepoTags.includes(tag))
-        );
-      }
-    } else {
-      if (selectedOrgTags.length === 0) {
-        cardsToRender = cards;
-      } else {
-        cardsToRender = cards.filter(
-          (card) =>
-            card.template.tags &&
-            card.template.tags.some((tag) => selectedOrgTags.includes(tag))
-        );
-      }
+    const selectedTags =
+      type === 'available' ? selectedRepoTags : selectedOrgTags;
+
+    const searchText =
+      type === 'available'
+        ? repoSearchText.toLowerCase()
+        : orgSearchText.toLowerCase();
+
+    let cardsToRender = [...cards];
+
+    // Filter by tags
+    if (selectedTags.length > 0) {
+      cardsToRender = cardsToRender.filter(
+        (card) =>
+          card.template.tags &&
+          card.template.tags.some((tag) => selectedTags.includes(tag))
+      );
+    }
+
+    // Filter by searchText
+    if (searchText.length > 0) {
+      cardsToRender = cardsToRender.filter(
+        (card) =>
+          (card.template.label &&
+            card.template.label.toLowerCase().includes(searchText)) ||
+          (card.template.description &&
+            card.template.description.toLowerCase().includes(searchText)) ||
+          (card.template.tags &&
+            card.template.tags.some((tag) =>
+              tag.toLowerCase().includes(searchText)
+            ))
+      );
     }
 
     return cardsToRender;

@@ -107,13 +107,15 @@ const Card = ({ type, startSelected, startExpanded, warning, data }) => {
         <div className="cardContent">
           <div className="cardContent__heading">
             <div className="cardContent__author">
-              <span className="bold">Author:</span> EAPMM
+              <span className="blue bold">Author:</span> EAPMM
             </div>
             <div className="cardContent__version">
-              <span className="bold">Version:</span> 2020.32
+              <span className="blue bold">Version:</span> 2020.32
             </div>
           </div>
-          <div className="cardContent__description">{data.description}</div>
+          <div className="cardContent__description">
+            {data.description || 'No description provided.'}
+          </div>
           {data.tags && (
             <div className="cardContent__tags">
               {data.tags &&

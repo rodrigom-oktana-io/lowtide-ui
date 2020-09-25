@@ -1,16 +1,18 @@
 import React, { useState, createContext } from 'react';
 
-const TagsContext = createContext();
+const FilterContext = createContext();
 
-const TagsContextProvider = (props) => {
+const FilterContextProvider = (props) => {
   const [allRepoTags, setAllRepoTags] = useState([]);
   const [selectedRepoTags, setSelectedRepoTags] = useState([]);
+  const [repoSearchText, setRepoSearchText] = useState('');
 
   const [allOrgTags, setAllOrgTags] = useState([]);
   const [selectedOrgTags, setSelectedOrgTags] = useState([]);
+  const [orgSearchText, setOrgSearchText] = useState('');
 
   return (
-    <TagsContext.Provider
+    <FilterContext.Provider
       value={{
         allRepoTags,
         setAllRepoTags,
@@ -20,11 +22,15 @@ const TagsContextProvider = (props) => {
         setAllOrgTags,
         selectedOrgTags,
         setSelectedOrgTags,
+        repoSearchText,
+        setRepoSearchText,
+        orgSearchText,
+        setOrgSearchText,
       }}
     >
       {props.children}
-    </TagsContext.Provider>
+    </FilterContext.Provider>
   );
 };
 
-export { TagsContextProvider, TagsContext };
+export { FilterContextProvider, FilterContext };

@@ -1,17 +1,17 @@
 import React, { useContext } from 'react';
-import { Popover, Button, Chip } from '@material-ui/core';
+import { Popover, Button } from '@material-ui/core';
 import { ExpandMore } from '@material-ui/icons';
 import clsx from 'clsx';
 
 import { useFilters, useFiltersStyles } from '../hooks/useFilters';
-import { TagsContext } from '../context/TagsContext';
+import { FilterContext } from '../context/FilterContext';
 import Tag from './Tag';
 
 import './FilterBox.scss';
 
 const FilterBox = ({ type }) => {
   const classes = useFiltersStyles();
-  const { selectedRepoTags, selectedOrgTags } = useContext(TagsContext);
+  const { selectedRepoTags, selectedOrgTags } = useContext(FilterContext);
 
   const tagsSelected =
     (type === 'available' && selectedRepoTags.length > 0) ||
