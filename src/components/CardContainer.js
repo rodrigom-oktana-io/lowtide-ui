@@ -18,6 +18,7 @@ const useStyles = makeStyles({
     },
     msOverflowStyle: 'none',
     scrollbarWidth: 'none',
+    marginBottom: '2rem',
   },
   title: {
     color: '#4f4f4f',

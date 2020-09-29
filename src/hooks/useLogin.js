@@ -15,8 +15,9 @@ const useLogin = () => {
   const formRef = useRef(null);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent the page from refreshing.
 
+    // Since preventDefault stops form validation, we need to programatically run it
     if (!formRef.current.checkValidity())
       return formRef.current.reportValidity();
 

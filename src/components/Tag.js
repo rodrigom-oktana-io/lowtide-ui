@@ -29,7 +29,7 @@ const Tag = ({ label, selected, handleChipClick, handleDelete }) => {
   return (
     <Chip
       label={label}
-      color={selected && 'primary'} // For contrast of delete button
+      color={selected && 'primary'} // Primary allows for a good contrast of the Chip's delete button. (Useful when the Tag is selected)
       size="small"
       classes={{
         root: clsx(classes.chipRoot, {
