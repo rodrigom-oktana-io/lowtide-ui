@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Accordion,
   AccordionSummary,
@@ -56,9 +56,22 @@ const useCardStyles = makeStyles({
   },
 });
 
-const Card = ({ type, startSelected, startExpanded, warning, data }) => {
+const Card = ({
+  type,
+  startSelected,
+  startExpanded,
+  warning,
+  data,
+  handleCardSelection,
+}) => {
   const [selected, setSelected] = useState(startSelected);
   const classes = useCardStyles();
+
+  // Add card to selected cards array.
+  useEffect(() => {
+    if (type === 'available') handleCardSelection(data.template_key, selected);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selected]);
 
   const badgeOptions = warning && {
     background: type === 'available' ? '#27AE60' : '#C23934',
@@ -119,7 +132,9 @@ const Card = ({ type, startSelected, startExpanded, warning, data }) => {
           {data.tags && (
             <div className="cardContent__tags">
               {data.tags &&
-                data.tags.map((tag) => <Tag label={tag} selected />)}
+                data.tags.map((tag) => (
+                  <Tag key={`key-${tag}`} label={tag} selected />
+                ))}
             </div>
           )}
         </div>

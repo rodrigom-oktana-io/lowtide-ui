@@ -6,16 +6,17 @@ import NavBar from '../components/Navbar';
 import CardContainer from '../components/CardContainer';
 import Card from '../components/Card';
 import useCards from '../hooks/useCards';
+import useDeploy from '../hooks/useDeploy';
 
 import './deploy.scss';
 
 const useStyles = makeStyles({
-  label: {
+  buttonLabel: {
     fontFamily: 'Montserrat',
     fontSize: '1rem',
     fontWeight: '700',
   },
-  root: {
+  buttonRoot: {
     height: 'fit-content',
     padding: '4px 12px',
     color: 'white',
@@ -24,12 +25,16 @@ const useStyles = makeStyles({
       backgroundColor: '#016dcc',
     },
   },
+  disabledRoot: {
+    backgroundColor: '#F6F6F6',
+  },
 });
 
 const Deploy = () => {
   const classes = useStyles();
   const [availableCards] = useCards('available');
   const [orgCards] = useCards('org');
+  const [selectedTemplates, handleCardSelection, deployCards] = useDeploy();
 
   return (
     <div className="fullPage">
@@ -57,17 +62,22 @@ const Deploy = () => {
                   name: card.template.label,
                   description: card.template.description,
                   tags: card.template.tags,
+                  template_key: card.template.template_key,
                 }}
+                handleCardSelection={handleCardSelection}
               />
             ))}
           </CardContainer>
 
           <Button
             disableRipple
+            disabled={selectedTemplates.length === 0}
             classes={{
-              root: classes.root,
-              label: classes.label,
+              root: classes.buttonRoot,
+              label: classes.buttonLabel,
+              disabled: classes.disabledRoot,
             }}
+            onClick={() => deployCards()}
           >
             Deploy
           </Button>
