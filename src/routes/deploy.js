@@ -4,8 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import NavBar from '../components/Navbar';
 import CardContainer from '../components/CardContainer';
-import Card from '../components/Card';
-import useCards from '../hooks/useCards';
+import Card from '../components/DeployCard';
+import useDeployCards from '../hooks/useDeployCards';
 import useDeploy from '../hooks/useDeploy';
 
 import '../assets/pagesStyles.scss';
@@ -32,8 +32,8 @@ const useStyles = makeStyles({
 
 const Deploy = () => {
   const classes = useStyles();
-  const [availableCards] = useCards('available');
-  const [orgCards] = useCards('org');
+  const [availableCards] = useDeployCards('available');
+  const [orgCards] = useDeployCards('org');
   const [selectedTemplates, handleCardSelection, deployCards] = useDeploy();
 
   return (

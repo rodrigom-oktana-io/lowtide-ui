@@ -26,7 +26,7 @@ The application uses React Context API to share state between components. `Sessi
 
 Component files should be kept short and focused on UI, so for large and reusable functionality, this project uses Custom Hooks, which is a convention that moves the application logic to their own files and return the data that the component needs to properly render the interface.
 
-`useCards.js`: Takes `type`(available/org) as a parameter. Takes care of getting the cards information from the backend API, the tags selected on `FilterBox.js` and the words inputted on `SearchBar.js` and returning the list of cards that should be rendered in each CardContainer.
+`useDeployCards.js`: Takes `type`(available/org) as a parameter. Takes care of getting the cards information from the backend API, the tags selected on `FilterBox.js` and the words inputted on `SearchBar.js` and returning the list of cards that should be rendered in each CardContainer.
 
 `useFilters.js`: Takes `type`(available/org) as a parameter. Handles the functionality of opening and closing the `FilterBox` component, getting all the tags that can be used, setting the selected tags, removing tags and updating the tags selected in the FiltersContext.
 
@@ -103,3 +103,8 @@ Based on the `Chip` component from MaterialUI, it represents a tag of the tool t
 - `selected`: _Boolean_.Determines fi the chip is selected (To give it an accent background).
 - handleChipClick: _function_. To be executed in the parent component when the Tag is clicked. If this prop is not provided, then the Tag won't be clickable.
 - handleDelete: _function_. To be executed in the parent component when the Tag is deleted. If this prop is not provided, then the Tag won't be deletable.
+
+## Next Steps
+
+- Implement real functionality by making calls to Lowtide Backen server.
+- Refactor some code to make escalation easier (e.g. Making a base card component with the custom styles and wrap other cards to give them the same look).

@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { repoTemplatesResponse, orgTemplatesResponse } from '../mockData';
 import { FilterContext } from '../context/FilterContext';
 
-const useCards = (type) => {
+const useDeployCards = (type) => {
   const [cards, setCards] = useState([]);
 
   const {
@@ -79,4 +79,4 @@ const useCards = (type) => {
   return [cardsToRender(type)];
 };
 
-export default useCards;
+export default useDeployCards;
