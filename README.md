@@ -97,12 +97,12 @@ When filters are selected in the FilterBox, it's only reflected in the component
 
 #### `Tag`
 
-Based on the `Chip` component from MaterialUI, it represents a tag of the tool templates. It's used both in the cards to show the specific template tags, and in the `FilterBox` to show all tags available; it can be clickable or deletable (mainly useful fot the ). Takes the following props:
+Based on the `Chip` component from MaterialUI, it represents a tag of the tool templates. It's used both in the cards to show the specific template tags, and in the `FilterBox` to show all tags available; it can be clickable or deletable (mainly useful fot the `FilterBox` component). Takes the following props:
 
 - `label`: _String_. The text to be displayed in the Tag.
 - `selected`: _Boolean_.Determines fi the chip is selected (To give it an accent background).
-- handleChipClick: _function_. To be executed in the parent component when the Tag is clicked. If this prop is not provided, then the Tag won't be clickable.
-- handleDelete: _function_. To be executed in the parent component when the Tag is deleted. If this prop is not provided, then the Tag won't be deletable.
+- `handleChipClick`: _function_. To be executed in the parent component when the Tag is clicked. If this prop is not provided, then the Tag won't be clickable.
+- `handleDelete`: _function_. To be executed in the parent component when the Tag is deleted. If this prop is not provided, then the Tag won't be deletable.
 
 ## Next Steps
 
