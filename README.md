@@ -77,12 +77,17 @@ A custom badge that is mainly used by cards –to indicate that there's a new ve
 
 A component that displays all cards of either type available (repo) or org, and a SearchBar to filter the cards. Rathen than passing the cards as a conventional props, Card Container expects the cards to be passed as childen props in order to render them. It uses `Paper` component from MaterialUI as base. Takes the following props:
 
+- `title`: _String_. the title to be displayed in the card container.
 - `type`: _String_. The type of card container (`available`/`org`)
 - `styles`: _Object_. Object with the desired width and height of the CardContainer.
+- `searchPlaceholder`: _String_. Placeholder for the CardContainer's `SearchBar`, if not provided the CardContainer will not have a SearchBar.
 
 #### `SearchBar`
 
-A bar where the user can enter a keyword or select tags to filter the card results in a `CardContainer`. It's based on the `Paper` component from MaterialUI and also uses the `InputBase` component. It receives just a `type` prop (`available`/`org`), which needs to be passed to the `FilterBox` component that `SearchBar` has nested.
+A bar where the user can enter a keyword or select tags to filter the card results in a `CardContainer`. It's based on the `Paper` component from MaterialUI and also uses the `InputBase` component. Takes the following props:
+
+- `type`: _String_. (`available`/`org`). Indicate which type of SearchBar to render, in order to control the functionality of searching for its correspondant CardContainer.
+- `placeholder`: _String_. Placeholder of the SearchBar.
 
 #### `FilterBox`
 

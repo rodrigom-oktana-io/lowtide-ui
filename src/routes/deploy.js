@@ -8,7 +8,7 @@ import Card from '../components/Card';
 import useCards from '../hooks/useCards';
 import useDeploy from '../hooks/useDeploy';
 
-import './deploy.scss';
+import '../assets/pagesStyles.scss';
 
 const useStyles = makeStyles({
   buttonLabel: {
@@ -47,10 +47,12 @@ const Deploy = () => {
           them to your org. You can also check what templates you already have
           in the right section.
         </p>
-        <div className="page-cardContainers">
+        <div className="page-mainContainer">
           <CardContainer
             type="available"
             styles={{ width: '30vw', height: '65vh' }}
+            title="Available Templates"
+            searchPlaceholder="Search Templates"
           >
             {availableCards.map((card, i) => (
               <Card
@@ -82,7 +84,12 @@ const Deploy = () => {
             Deploy
           </Button>
 
-          <CardContainer type="org" styles={{ width: '30vw', height: '65vh' }}>
+          <CardContainer
+            type="org"
+            styles={{ width: '30vw', height: '65vh' }}
+            title="Your Org"
+            searchPlaceholder="Search Templates"
+          >
             {orgCards.map((card, i) => (
               <Card
                 key={i}

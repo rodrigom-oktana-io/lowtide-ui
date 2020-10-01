@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Paper, InputBase } from '@material-ui/core';
 
@@ -20,23 +20,36 @@ const useStyles = makeStyles({
   },
 });
 
-const SearchBar = ({ type }) => {
+const SearchBar = ({ type, placeholder }) => {
   const classes = useStyles();
-  const { setRepoSearchText, setOrgSearchText } = useContext(FilterContext);
+
+  const [text, setText] = useState('');
+
+  // get these values if the component is wrapped up by the FiltersContext, otherwise make them null
+  const isDeployPage = Boolean(useContext(FilterContext));
+  const { setRepoSearchText = null, setOrgSearchText = null } =
+    useContext(FilterContext) || {};
 
   const handleChange = (e) => {
-    if (type === 'available') return setRepoSearchText(e.target.value);
-    setOrgSearchText(e.target.value);
+    setText(e.target.value);
+    if (isDeployPage) {
+      if (type === 'available') return setRepoSearchText(text);
+      setOrgSearchText(text);
+    } else {
+      // Handle change for tiemshift page
+    }
   };
 
   return (
     <Paper className={classes.root}>
       <InputBase
         className={classes.input}
-        placeholder={'Search templates'}
+        placeholder={placeholder}
+        value={text}
         onChange={(e) => handleChange(e)}
       />
-      <FilterBox type={type} />
+      {/* FilterBox only for deploy page */}
+      {isDeployPage && <FilterBox type={type} />}
     </Paper>
   );
 };

@@ -27,7 +27,13 @@ const useStyles = makeStyles({
   },
 });
 
-const CardContainer = ({ children, type, styles }) => {
+const CardContainer = ({
+  children,
+  title,
+  type,
+  styles,
+  searchPlaceholder,
+}) => {
   const classes = useStyles(styles);
 
   return (
@@ -36,10 +42,11 @@ const CardContainer = ({ children, type, styles }) => {
         root: classes.root,
       }}
     >
-      <h3 className={classes.title}>
-        {type === 'available' ? 'Available Templates' : 'Your org'}
-      </h3>
-      <SearchBar filterBox placeholder="Search Templates" type={type} />
+      <h3 className={classes.title}>{title}</h3>
+      {searchPlaceholder && (
+        <SearchBar filterBox type={type} placeholder={searchPlaceholder} />
+      )}
+
       {children}
     </Paper>
   );
